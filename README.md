@@ -1,6 +1,6 @@
 # Geodata
 
-## World.gpkg
+## vector-data.gpkg
 
 Extracted from [Natural Earth](https://www.naturalearthdata.com/). Contains the layers:
 - ne_10m_admin_0_countries
@@ -14,21 +14,23 @@ wget \
 
 # unzip
 unzip \
-  -d natural_earth_vector\
+  -d natural_earth_vector \
   natural_earth_vector.zip
 
 # create GeoPackage
 ogr2ogr \
   -f GPKG \
-  world.gpkg \
+  -nlt PROMOTE_TO_MULTI \
+  vector-data.gpkg \
   natural_earth_vector/10m_cultural \
   ne_10m_admin_0_countries \
   ne_10m_populated_places
 
 ogr2ogr \
   -f GPKG \
+  -nlt PROMOTE_TO_MULTI \
   -update \
-  world.gpkg \
+  vector-data.gpkg \
   natural_earth_vector/10m_physical/ne_10m_rivers_lake_centerlines.shp
 ```
 
