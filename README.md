@@ -8,7 +8,7 @@ Extracted from [Natural Earth](https://www.naturalearthdata.com/). Contains the 
 - ne_10m_populated_places
 
 ```shell
-# download 
+# download
 wget \
   http://naciscdn.org/naturalearth/packages/natural_earth_vector.zip
 
@@ -37,3 +37,24 @@ ogr2ogr \
 ## World.tiff
 
 A downsampled version of the rasterfile from [Natural Earth](https://www.naturalearthdata.com/).
+
+## Postal Codes Germany
+
+- Taken from [ESRI Open Data](https://opendata-esri-de.opendata.arcgis.com/datasets/5b203df4357844c8a6715d7d411a8341_0?geometry=7.120%2C47.019%2C12.294%2C48.314)
+- License: `Die Daten stehen unter der Open Database Licence frei zur Verfügung. Quelle der Rohdaten: © OpenStreetMap contributorsEinwohnerzahlen als Berechnungsgrundlage © Statistische Ämter des Bundes und der Länder`
+- Converted to GeoPackage via:
+
+```shell
+wget \
+  -O postal_codes_germany.zip \
+  'https://opendata.arcgis.com/datasets/5b203df4357844c8a6715d7d411a8341_0.zip?outSR=%7B%22latestWkid%22%3A3857%2C%22wkid%22%3A102100%7D'
+
+unzip \
+  postal_codes_germany.zip \
+  -d postal_codes_germany
+
+ogr2ogr \
+  -f GPKG postal_codes_germany.gpkg \
+  postal_codes_germany \
+  OSM_PLZ_072019
+```
