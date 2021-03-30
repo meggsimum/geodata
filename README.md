@@ -56,6 +56,8 @@ unzip \
 ogr2ogr \
   -f GPKG postal_codes_germany.gpkg \
   -t_srs EPSG:4326 \
+  -nlt PROMOTE_TO_MULTI \
+  -nln postal_codes_germany \
   postal_codes_germany \
   OSM_PLZ_072019
 ```
