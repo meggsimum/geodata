@@ -61,3 +61,22 @@ ogr2ogr \
   postal_codes_germany \
   OSM_PLZ_072019
 ```
+
+## Federal States Germany
+
+- [Website Resource](https://mis.bkg.bund.de/trefferanzeige?docuuid=cfbe95dc-81b9-4704-a61c-d71070d15fd3)
+- License:
+```
+Die Daten sind urheberrechtlich geschützt. Der Datensatz wird entgeltfrei mit der Datenlizenz Deutschland Namensnennung 2.0 (https://www.govdata.de/dl-de/by-2-0) zur Verfügung gestellt. Der Quellenvermerk ist zu beachten. Quellenvermerk: © GeoBasis-DE / BKG (2021)
+```
+- Abstract of the [WFS Service](https://sgx.geodatenzentrum.de/wfs_vg250?REQUEST=GetCapabilities&SERVICE=WFS):
+```
+Downloaddienst der Verwaltungsgebiete 1:250 000 Stand 01.01. für das Gebiet der Bundesrepublik Deutschland. Der Dienst umfasst sämtliche Verwaltungseinheiten der hierarchischen Verwaltungsebenen vom Staat bis zu den Gemeinden mit ihren Grenzen, statistischen Schlüsselzahlen, Namen der Verwaltungseinheit sowie die spezifische Bezeichnung der Verwaltungsebene des jeweiligen Landes. Die Geometrie der Grenzen ist hinsichtlich Genauigkeit und Auflösung auf das ATKIS®-DLM250 ausgerichtet. Für jede Gemeinde ist zusätzlich ein Punktobjekt im Datensatz enthalten. Die Geometrie dieser Punkte ist den Ortslagen des DLM250 entnommen. Die Daten sind ebenenweise (Staat, Länder, Regierungsbezirke, Kreise, Verwaltungsgemeinschaften und Gemeinden) gegliedert und die enthaltenen Flächen tragen direkt die attributiven Informationen.
+```
+- Downloaded as GML via WFS and converted to GeoPackage
+```shell
+ogr2ogr \
+  -f GPKG out.gpkg \
+  'https://sgx.geodatenzentrum.de/wfs_vg250?SERVICE=WFS&REQUEST=GetFeature&VERSION=2.0.0&TYPENAMES=vg250:vg250_lan'
+```
+- Manually removed the coastal and lake areas using QGIS
